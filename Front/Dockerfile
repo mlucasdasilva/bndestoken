@@ -1,8 +1,8 @@
 FROM node:8 as builder
 ADD . /bndestoken-front
 WORKDIR /bndestoken-front
-RUN npm install
-RUN npm run-script build
+#RUN npm install
+#RUN npm run-script build
 
 
 FROM nginx
@@ -14,7 +14,8 @@ ADD default.conf /etc/nginx/conf.d/
 
 
 # Copy result of build to nginx folder
-COPY --from=builder /bndestoken-front/dist /usr/share/nginx/html
+#COPY --from=builder /bndestoken-front/dist /usr/share/nginx/html
+COPY --from=builder /bndestoken-front /usr/share/nginx/html/bndestoken-front
 
 # Expondo as portas necessárias
 EXPOSE 8000
